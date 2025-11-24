@@ -327,15 +327,14 @@ def svg_overwrite(filename, age_data, commit_data, star_data, repo_data, contrib
     """
     tree = etree.parse(filename)
     root = tree.getroot()
-    justify_format(root, 'commit_data', commit_data, 22)
-    justify_format(root, 'star_data', star_data, 14)
-    justify_format(root, 'repo_data', repo_data, 6)
-    justify_format(root, 'contrib_data', contrib_data)
-    justify_format(root, 'follower_data', follower_data, 10)
-    # LOC updates removed - LOC line removed from SVG files
-    # justify_format(root, 'loc_data', loc_data[2], 9)
-    # justify_format(root, 'loc_add', loc_data[0])
-    # justify_format(root, 'loc_del', loc_data[1], 7)
+    justify_format(root, 'commit_data', commit_data, 12)
+    justify_format(root, 'star_data', star_data, 8)
+    justify_format(root, 'repo_data', repo_data, 4)
+    justify_format(root, 'contrib_data', contrib_data, 6)
+    justify_format(root, 'follower_data', follower_data, 6)
+    justify_format(root, 'loc_data', loc_data[2], 9)
+    justify_format(root, 'loc_add', loc_data[0])
+    justify_format(root, 'loc_del', loc_data[1], 7)
     tree.write(filename, encoding='utf-8', xml_declaration=True)
 
 
@@ -454,11 +453,9 @@ if __name__ == '__main__':
     formatter('account data', user_time)
     age_data, age_time = perf_counter(daily_readme, datetime.datetime(2003, 12, 16))
     formatter('age calculation', age_time)
-    # LOC calculation disabled for speed - uncomment below to enable
-    # total_loc, loc_time = perf_counter(loc_query, ['OWNER'], 7)
-    # formatter('LOC (cached)', loc_time) if total_loc[-1] else formatter('LOC (no cache)', loc_time)
-    total_loc = ['0', '0', '0']  # Placeholder: [added, deleted, total]
-    loc_time = 0
+    # LOC calculation - can be slow for large repositories
+    total_loc, loc_time = perf_counter(loc_query, ['OWNER'], 7)
+    formatter('LOC (cached)', loc_time) if total_loc[-1] else formatter('LOC (no cache)', loc_time)
     # Get commits from contributions (last year) - faster than LOC calculation
     # Note: This only gets commits from the last year, not all-time
     from datetime import timedelta
@@ -480,16 +477,17 @@ if __name__ == '__main__':
     #     contrib_data += archived_data[-1]
     #     commit_data += int(archived_data[-2])
 
-    # LOC removed - passing empty list
-    loc_formatted = []
+    # Format LOC data: [added, deleted, total, cached_status]
+    # total_loc is [added, deleted, total, cached_status], we need to format the numbers
+    loc_formatted = [f"{'{:,}'.format(total_loc[0])}", f"{'{:,}'.format(total_loc[1])}", f"{'{:,}'.format(total_loc[2])}"]
 
     svg_overwrite('dark_mode.svg', age_data, commit_data, star_data, repo_data, contrib_data, follower_data, loc_formatted)
     svg_overwrite('light_mode.svg', age_data, commit_data, star_data, repo_data, contrib_data, follower_data, loc_formatted)
 
     # move cursor to override 'Calculation times:' with 'Total function time:' and the total function time, then move cursor back
-    print('\033[F\033[F\033[F\033[F\033[F\033[F\033[F',
-        '{:<21}'.format('Total function time:'), '{:>11}'.format('%.4f' % (user_time + age_time + commit_time + star_time + repo_time + contrib_time)),
-        ' s \033[E\033[E\033[E\033[E\033[E\033[E\033[E', sep='')
+    print('\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F',
+        '{:<21}'.format('Total function time:'), '{:>11}'.format('%.4f' % (user_time + age_time + loc_time + commit_time + star_time + repo_time + contrib_time)),
+        ' s \033[E\033[E\033[E\033[E\033[E\033[E\033[E\033[E', sep='')
 
     print('Total GitHub GraphQL API calls:', '{:>3}'.format(sum(QUERY_COUNT.values())))
     for funct_name, count in QUERY_COUNT.items(): print('{:<28}'.format('   ' + funct_name + ':'), '{:>6}'.format(count))
