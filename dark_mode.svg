@@ -47,10 +47,10 @@ text, tspan {white-space: pre;}
 <tspan x="425" y="30">yi-json</tspan> -———————————————————————————————————————————-—--
 <tspan x="425" y="50" class="cc">. </tspan><tspan class="key">OS</tspan>:<tspan class="cc"> ......................... </tspan><tspan class="value">Windows 11, MacOS, Linux</tspan>
 <tspan x="425" y="70" class="cc">. </tspan><tspan class="key">Uptime</tspan>:<tspan class="cc" id="age_data_dots"> .................. </tspan><tspan class="value" id="age_data">21 years, 11 months, 1 week</tspan>
-<tspan x="425" y="90" class="cc">. </tspan><tspan class="key">Host</tspan>:<tspan class="cc"> .................................</tspan><tspan class="value">UNC-Chapel Hill</tspan>
+<tspan x="425" y="90" class="cc">. </tspan><tspan class="key">Host</tspan>:<tspan class="cc"> ................................ </tspan><tspan class="value">UNC-Chapel Hill</tspan>
 <tspan x="425" y="110" class="cc">. </tspan><tspan class="key">Kernel</tspan>:<tspan class="cc"> .............. </tspan><tspan class="value">Computer Science and Statistics</tspan>
-<tspan x="425" y="130" class="cc">. </tspan><tspan class="key">Drivers</tspan>:<tspan class="cc"> ..................... </tspan><tspan class="value">Scale AI, AWS, Fidelity</tspan>
-<tspan x="425" y="150" class="cc">. </tspan><tspan class="key">IDE</tspan>:<tspan class="cc"> .............. </tspan><tspan class="value">Neovim, VSCode, Google Antigravity</tspan>
+<tspan x="425" y="130" class="cc">. </tspan><tspan class="key">Drivers</tspan>:<tspan class="cc"> ......... </tspan><tspan class="value">Scale AI, AWS, Fidelity Investments</tspan>
+<tspan x="425" y="150" class="cc">. </tspan><tspan class="key">IDE</tspan>:<tspan class="cc"> ..... </tspan><tspan class="value">Neovim, VSCode, Sublime, Google Antigravity</tspan>
 <tspan x="425" y="170" class="cc">. </tspan>
 <tspan x="425" y="190" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Programming</tspan>:<tspan class="cc"> ......... </tspan><tspan class="value">C++, Go, Rust, Python</tspan>
 <tspan x="425" y="210" class="cc">. </tspan><tspan class="key">Languages</tspan>.<tspan class="key">Computer</tspan>:<tspan class="cc"> .... </tspan><tspan class="value">JSON, Protocol Buffers, LaTeX</tspan>
@@ -65,7 +65,7 @@ text, tspan {white-space: pre;}
 <tspan x="425" y="410" class="cc">. </tspan><tspan class="key">LinkedIn</tspan>:<tspan class="cc"> .................................... </tspan><tspan class="value">json-yi</tspan>
 <tspan x="425" y="430" class="cc">. </tspan><tspan class="key">Discord</tspan>:<tspan class="cc"> ....................................... </tspan><tspan class="value">js.0n</tspan>
 <tspan x="425" y="470">- GitHub Stats</tspan> -———————————————————————————————————-—---
-<tspan x="425" y="490" class="cc">. </tspan><tspan class="key">Repos</tspan>:<tspan class="cc" id="repo_data_dots">. </tspan><tspan class="value" id="repo_data">32</tspan> {<tspan class="key">Contributed</tspan>: <tspan class="value" id="contrib_data">116</tspan>} | <tspan class="key">Stars</tspan>:<tspan class="cc" id="star_data_dots"> ...... </tspan><tspan class="value" id="star_data">12</tspan>
-<tspan x="425" y="510" class="cc">. </tspan><tspan class="key">Commmits</tspan>:<tspan class="cc" id="commit_data_dots"> ......... </tspan><tspan class="value" id="commit_data">186</tspan> | <tspan class="key">Followers</tspan>:<tspan class="cc" id="follower_data_dots"> .... </tspan><tspan class="value" id="follower_data">32</tspan>
+<tspan x="425" y="490" class="cc">. </tspan><tspan class="key">Repos</tspan>:<tspan class="cc" id="repo_data_dots"> .. </tspan><tspan class="value" id="repo_data">32</tspan> {<tspan class="key">Contributed</tspan>: <tspan class="value" id="contrib_data">116</tspan>} | <tspan class="key">Stars</tspan>:<tspan class="cc" id="star_data_dots"> .......... </tspan><tspan class="value" id="star_data">12</tspan>
+<tspan x="425" y="510" class="cc">. </tspan><tspan class="key">Commits</tspan>:<tspan class="cc" id="commit_data_dots"> .................. </tspan><tspan class="value" id="commit_data">186</tspan> | <tspan class="key">Followers</tspan>:<tspan class="cc" id="follower_data_dots"> ...... </tspan><tspan class="value" id="follower_data">32</tspan>
 </text>
 </svg>

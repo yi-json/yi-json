@@ -114,14 +114,63 @@ def stars_counter(data):
 def svg_overwrite(filename, age_data, commit_data, star_data, repo_data, contrib_data, follower_data):
     """
     Parse SVG files and update elements with my age, commits, stars, and repositories
+    Aligns the GitHub Stats lines so | and right edge are consistent
     """
     tree = etree.parse(filename)
     root = tree.getroot()
-    justify_format(root, 'commit_data', commit_data, 12)
-    justify_format(root, 'star_data', star_data, 8)
-    justify_format(root, 'repo_data', repo_data, 4)
-    justify_format(root, 'contrib_data', contrib_data, 6)
-    justify_format(root, 'follower_data', follower_data, 6)
+    
+    # Format numbers with commas
+    repo_str = f"{repo_data:,}"
+    contrib_str = f"{contrib_data:,}"
+    star_str = f"{star_data:,}"
+    commit_str = f"{commit_data:,}"
+    follower_str = f"{follower_data:,}"
+    
+    # Line 1: . Repos:[dots]repo {Contributed: contrib} | Stars:[dots]star
+    # Line 2: . Commits:[dots]commit | Followers:[dots]follower
+    
+    # For | alignment: left sides must be equal width
+    # Line 1 left fixed: ". Repos:" (8) + " {Contributed: " (15) + "}" (1) = 24
+    # Line 2 left fixed: ". Commits:" (10)
+    # Difference = 14 + len(repo) + len(contrib) - len(commit)
+    
+    # For right edge alignment: "Followers:" is 4 chars longer than "Stars:"
+    # So: star_dots = follower_dots + 4
+    
+    # Use minimum dots for repo (4 chars = " .. ")
+    repo_dots = 4
+    
+    # commit_dots must compensate for the difference in left side fixed content
+    # 24 + len(repo) + len(contrib) + repo_dots = 10 + len(commit) + commit_dots
+    commit_dots = 24 + len(repo_str) + len(contrib_str) + repo_dots - 10 - len(commit_str)
+    commit_dots = max(4, commit_dots)
+    
+    # For right side alignment with minimum follower_dots
+    follower_dots = 8
+    star_dots = follower_dots + 4  # compensate for "Followers:" being 4 chars longer
+    
+    # Helper to create dot string (n is total length including spaces)
+    def make_dots(n):
+        if n <= 0:
+            return ' '
+        elif n == 1:
+            return ' '
+        elif n == 2:
+            return '. '
+        else:
+            return ' ' + '.' * (n - 2) + ' '
+    
+    # Update all elements
+    find_and_replace(root, 'repo_data', repo_str)
+    find_and_replace(root, 'repo_data_dots', make_dots(repo_dots))
+    find_and_replace(root, 'contrib_data', contrib_str)
+    find_and_replace(root, 'star_data', star_str)
+    find_and_replace(root, 'star_data_dots', make_dots(star_dots))
+    find_and_replace(root, 'commit_data', commit_str)
+    find_and_replace(root, 'commit_data_dots', make_dots(commit_dots))
+    find_and_replace(root, 'follower_data', follower_str)
+    find_and_replace(root, 'follower_data_dots', make_dots(follower_dots))
+    
     tree.write(filename, encoding='utf-8', xml_declaration=True)
 
 
